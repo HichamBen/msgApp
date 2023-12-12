@@ -1,55 +1,52 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
 const errorHandler = require("./midlewares/errorHandler");
-const User = require("./models/User");
 const logRequest = require("./midlewares/logRequest");
-const uploadFile = require("multer")();;
+const { corsOptions } = require("./config/corsConfig");
 
 // initialze express app
-const app = express();
+const app = express(); 
 
-/** middlewares
- * 1) express.urlencoded for parsing form fields.
- * 2) express.json for parsing application/json fields.
- * 2) logs of all req recieved from client-side
- */
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// middleware for requests logs
 app.use(logRequest);
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-})
+/** middlewares
+ * 1) cors: to prevent untrusted requests.
+ * 2) helmet: for adding more layer of security to http req & res.
+ * 3) express.urlencoded for parsing form fields.
+ * 4) express.json for parsing application/json fields.
+ * 5) cookieParser: make reading cookies easier (e.g: req.cookies)
+ */
+app.use(cors(corsOptions));
+app.use(helmet());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
+/*_______________________ */
 
 /** routes */
-app.post("/user",uploadFile.single("picture"), async (req, res, next) => {
-  const { username, email, password } = req.body;
-  
-  try {
-    const newUser = await User.register(username, email, password, req.file);
-    await newUser.save();
-    res.sendStatus(201);
-  } catch (error) {
-    next(error);
-  }
-});
+// without credentials
+app.use("/login", require("./routes/loginRouter"));
+app.use("/signup", require("./routes/signupRouter"));
+app.use("/refresh", require("./routes/refreshTokenRouter")); //
 
-app.post("/login", async (req, res, next) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.login(email, password);
-  
-    res.status(200).json(user);
-  } catch (error) {
-    res.statusCode = error.code;
-    next(error);
-  }
+// with credentials
+app.use("/user", require("./routes/api/userRoutes"));
+
+// not found
+app.all("*", (_req, res) => {
+  res.status(404).send("Not found route!");
 });
+/*_______________________ */
 
 /** Global Error handler */
 app.use(errorHandler);
 
+/** connect the db then the server */
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(_client => {
@@ -61,3 +58,4 @@ mongoose
   .catch(err => {
     console.log("error in db connection: ", err);
   });
+/*_______________________ */

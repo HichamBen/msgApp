@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 const { generatePwd, isValidPwd } = require("../utilities/genValidPwd");
 const {
   validName,
   validEmail,
   validPassword,
 } = require("../utilities/validator");
+
+const { generateCode } = require("../utilities/generateCode");
 
 const userSchema = new mongoose.Schema(
   {
@@ -26,7 +29,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     picture: {
-      fileName:String,
+      fileName: String,
       encoding: String,
       mimetype: String,
       data: Buffer,
@@ -47,6 +50,7 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    verificationCode: String,
   },
   { timestamps: true }
 );
@@ -58,11 +62,12 @@ userSchema.statics.register = async function (
   password,
   picture = undefined
 ) {
-  // check if username, email, and password sended
+  // check if username, email, and password are sended
   if (!username || !email || !password) {
     throw new Error("The username, the email, and the password are requried!");
   }
 
+  // check if username, email, and password are valid
   const nameResult = validName(username);
   const emailResult = validEmail(email);
   const pwdResult = validPassword(password);
@@ -79,6 +84,7 @@ userSchema.statics.register = async function (
     throw new Error(pwdResult[0]);
   }
 
+  // if the user signup with profile picture
   if (picture) {
     console.log(picture.size, 1000000);
     if (picture.size > 1000000) {
@@ -89,7 +95,16 @@ userSchema.statics.register = async function (
     }
   }
 
-  const hash = generatePwd(password);
+  const hash = generatePwd(password); // genearte a crypted password
+  const verificationCode = jwt.sign(
+    generateCode(6).join(""),
+    proccess.env.VERIFICATION_CODE_SECRETE,
+    {
+      expiresIn: 5 * 60,
+    }
+  ); // genearte a random verification code
+
+  // create new User
   const newUser = this.create({
     username,
     email,
@@ -103,6 +118,7 @@ userSchema.statics.register = async function (
           size: picture.size,
         }
       : null,
+    verificationCode,
   });
 
   return newUser;
