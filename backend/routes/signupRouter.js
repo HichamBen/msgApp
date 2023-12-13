@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const upload = require("multer")();
 
-const { registerControllers } = require("../controllers/registerControllers");
+const { signupController } = require("../controllers/registerControllers");
 
-router.post("/", upload.single("picture"), registerControllers);
+router.post("/", upload.single("picture"), signupController);
 
 module.exports = router;

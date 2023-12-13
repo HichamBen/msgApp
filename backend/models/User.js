@@ -7,8 +7,6 @@ const {
   validPassword,
 } = require("../utilities/validator");
 
-const { generateCode } = require("../utilities/generateCode");
-
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -60,6 +58,7 @@ userSchema.statics.register = async function (
   username,
   email,
   password,
+  verificationCode,
   picture = undefined
 ) {
   // check if username, email, and password are sended
@@ -86,7 +85,6 @@ userSchema.statics.register = async function (
 
   // if the user signup with profile picture
   if (picture) {
-    console.log(picture.size, 1000000);
     if (picture.size > 1000000) {
       throw new Error("The picture size must be less than or equal 1MB.");
     }
@@ -96,14 +94,6 @@ userSchema.statics.register = async function (
   }
 
   const hash = generatePwd(password); // genearte a crypted password
-  const verificationCode = jwt.sign(
-    generateCode(6).join(""),
-    proccess.env.VERIFICATION_CODE_SECRETE,
-    {
-      expiresIn: 5 * 60,
-    }
-  ); // genearte a random verification code
-
   // create new User
   const newUser = this.create({
     username,

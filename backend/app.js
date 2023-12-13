@@ -28,6 +28,9 @@ app.use(express.json());
 app.use(cookieParser());
 /*_______________________ */
 
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html")
+})
 /** routes */
 // without credentials
 app.use("/login", require("./routes/loginRouter"));

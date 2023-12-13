@@ -1,4 +1,4 @@
-const allowedList = ["http://localhost:5173"];
+const allowedList = ["http://localhost:5173", "null", undefined];
 
 const corsOptions = {
   origin: function (origin, callback) {
