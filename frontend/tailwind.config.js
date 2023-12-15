@@ -11,6 +11,7 @@ export default {
         mainBg: "var(--mainBg)",
         primaryBg: "var(--primaryBg)",
         secondaryBg: "var(--secondaryBg)",
+        thirdBg:"var(--thirdBg)",
         redIcons: "var(--redIcons)",
         greenIcons: "var(--greenIcons)",
         blueBar: "var(--blueBar)",

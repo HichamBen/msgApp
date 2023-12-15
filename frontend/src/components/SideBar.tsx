@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChatsIcon, GearIcon, PhoneIcon, PowerIcon, UsersIcon } from "../icons";
+import { ChatsIcon, PhoneIcon, PowerIcon, UsersIcon } from "../icons";
+import Settings from "./Settings";
 
 function SideBar() {
   const [page, setPage] = useState<"chats" | "contacts" | "calls">("chats");
@@ -55,12 +56,7 @@ function SideBar() {
         </div>
       </div>
       <div className="w-full flex flex-col gap-y-5 items-center">
-        <GearIcon
-          onclick={() => console.log("calls")}
-          width="28"
-          height="28"
-          style="cursor-pointer fill-primaryText hover:fill-secondaryBg hover:rotate-180 transition-all duration-300 ease-out"
-        />
+        <Settings />
 
         <PowerIcon
           onclick={() => setStatus(!status)}

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,24 +7,26 @@
   --mainBg: theme("colors.gray.800");
   --sideBg: theme("colors.black");
   --secondaryBg: theme("colors.gray.600");
+  --thirdBg: theme("colors.gray.300");
   --redIcons: theme("colors.red.600");
   --greenIcons: theme("colors.green.600");
   --blueBar: theme("colors.sky.700");
   --primaryText: theme("colors.gray.100");
-  --secondaryText: theme("colors.gray.300");
+  --secondaryText: theme("colors.gray.200");
 }
 
 .light-theme {
   --mainBg: theme("colors.gray.200");
   --sideBg: theme("colors.slate.800");
   --secondaryBg: theme("colors.gray.50");
+  --thirdBg: theme("colors.gray.100");
   --redIcons: theme("colors.red.600");
   --greenIcons: theme("colors.green.600");
-  --blueBar: theme("colors.sky.700");
+  --blueBar: theme("colors.sky.600");
   --primaryText: theme("colors.gray.100");
   --secondaryText: theme("colors.gray.300");
 }
 
 #root {
-  @apply dark-theme font-rubik w-screen h-screen flex;
+  @apply font-rubik w-full min-h-screen h-[420px] flex;
 }

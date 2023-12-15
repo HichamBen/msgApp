@@ -5,10 +5,14 @@ function Chats() {
 
   return (
     <section className="w-full h-full grid grid-cols-6">
-      <aside className="hidden bg-secondaryBg lg:block lg:col-span-2">
-    
-      </aside>
-      {pathname.match(/^(\/chats|\/chats\/)$/) ? <div className="col-span-6 lg:col-span-4 bg-mainBg text-secondaryText">Noting</div> : <Outlet />}
+      <aside className="hidden bg-secondaryBg lg:block lg:col-span-2 overflow-y-auto"></aside>
+      {pathname.match(/^(\/chats|\/chats\/)$/) ? (
+        <div className="col-span-6 lg:col-span-4 bg-mainBg text-secondaryText">
+          Noting
+        </div>
+      ) : (
+        <Outlet />
+      )}
     </section>
   );
 }
