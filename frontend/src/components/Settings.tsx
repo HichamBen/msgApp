@@ -9,8 +9,8 @@ function Settings() {
   const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
-    function dismissSettingModal(e: MouseEvent) {
-      // To do dismiss the click outside the settings modal
+    function dismissSettingModal() {
+      setShowSettings(false);
     }
 
     window.addEventListener("click", dismissSettingModal);
@@ -28,18 +28,24 @@ function Settings() {
   };
 
   return (
-    <section aria-labelledby="settings" className="relative">
+    <section
+      onClick={e => e.stopPropagation()}
+      aria-labelledby="settings"
+      className="relative"
+    >
       <GearIcon
+        role="button"
         onclick={() => setShowSettings(!showSettings)}
         width="28"
         height="28"
-        style="cursor-pointer fill-primaryText hover:fill-secondaryBg hover:rotate-180 transition-all duration-300 ease-out"
+        style="cursor-pointer fill-thirdBg hover:fill-secondaryBg hover:rotate-180 transition-all duration-300 ease-out"
       />
 
+      {/* settingsModal */}
       <ul
         id="settings"
-        className={`w-56 bg-thirdBg rounded border drop-shadow-xl absolute left-full bottom-full transition-transform duration-500 ${
-          showSettings ? "scale-100" : "invisible scale-0"
+        className={`w-56 bg-thirdBg rounded border drop-shadow-xl absolute z-10 left-full bottom-full transition-all duration-500 ${
+          showSettings ? "scale-100" : "invisible opacity-0 scale-0"
         }`}
       >
         <SettingsRow

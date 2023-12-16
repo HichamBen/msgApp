@@ -8,9 +8,16 @@ type IconProps = {
   role?: string;
 };
 
-export const ChatsIcon = ({ onclick, style, width, height }: IconProps) => {
+export const ChatsIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 34 32"
@@ -32,9 +39,16 @@ export const ChatsIcon = ({ onclick, style, width, height }: IconProps) => {
   );
 };
 
-export const UsersIcon = ({ onclick, style, width, height }: IconProps) => {
+export const UsersIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 34 32"
@@ -47,9 +61,16 @@ export const UsersIcon = ({ onclick, style, width, height }: IconProps) => {
   );
 };
 
-export const PhoneIcon = ({ onclick, style, width, height }: IconProps) => {
+export const PhoneIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 34 32"
@@ -64,9 +85,16 @@ export const PhoneIcon = ({ onclick, style, width, height }: IconProps) => {
   );
 };
 
-export const GearIcon = ({ onclick, style, width, height }: IconProps) => {
+export const GearIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 34 34"
@@ -98,9 +126,16 @@ export const PowerIcon = ({ onclick, style, width, height }: IconProps) => {
   );
 };
 
-export const UserIcon = ({ onclick, style, width, height }: IconProps) => {
+export const UserIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 34 32"
@@ -116,9 +151,16 @@ export const UserIcon = ({ onclick, style, width, height }: IconProps) => {
   );
 };
 
-export const CrescentIcon = ({ onclick, style, width, height }: IconProps) => {
+export const CrescentIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 34 32"
@@ -131,9 +173,16 @@ export const CrescentIcon = ({ onclick, style, width, height }: IconProps) => {
   );
 };
 
-export const CarretIcon = ({ onclick, style, width, height }: IconProps) => {
+export const CarretIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 512 512"
@@ -146,9 +195,16 @@ export const CarretIcon = ({ onclick, style, width, height }: IconProps) => {
   );
 };
 
-export const TrashIcon = ({ onclick, style, width, height }: IconProps) => {
+export const TrashIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
   return (
     <svg
+      role={role ?? "none"}
       width={width}
       height={height}
       viewBox="0 0 34 32"
@@ -156,9 +212,29 @@ export const TrashIcon = ({ onclick, style, width, height }: IconProps) => {
       className={style ?? ""}
       onClick={onclick}
     >
-      <path
-        d="M23.1429 4.28571H18.7296L16.9082 1.24554C16.3982 0.472875 15.6107 0 14.7107 0H9.28929C8.38929 0 7.55357 0.472875 7.09286 1.24554L5.27036 4.28571H0.857143C0.381696 4.28571 0 4.66768 0 5.14286V6C0 6.47679 0.381696 6.85714 0.857143 6.85714H1.71429V24C1.71429 25.8937 3.24911 27.4286 5.14286 27.4286H18.8571C20.7509 27.4286 22.2857 25.8937 22.2857 24V6.85714H23.1429C23.6196 6.85714 24 6.47679 24 6V5.14286C24 4.66768 23.6196 4.28571 23.1429 4.28571ZM9.20893 2.72571C9.2625 2.63196 9.36964 2.57143 9.48214 2.57143H14.5179C14.6317 2.57143 14.7388 2.6317 14.7924 2.72545L15.7286 4.28571H8.27143L9.20893 2.72571ZM18.8571 24.8571H5.14286C4.66945 24.8571 4.28571 24.4734 4.28571 24V6.85714H19.7143V24C19.7143 24.4714 19.3286 24.8571 18.8571 24.8571ZM12 22.2857C12.4738 22.2857 12.8571 21.9024 12.8571 21.4286V10.2857C12.8571 9.81193 12.4738 9.42857 12 9.42857C11.5262 9.42857 11.1429 9.81428 11.1429 10.2857V21.4286C11.1429 21.9 11.5286 22.2857 12 22.2857ZM7.71429 22.2857C8.18571 22.2857 8.57143 21.9 8.57143 21.4286V10.2857C8.57143 9.81193 8.18807 9.42857 7.71429 9.42857C7.2405 9.42857 6.85714 9.81428 6.85714 10.2857V21.4286C6.85714 21.9 7.24286 22.2857 7.71429 22.2857ZM16.2857 22.2857C16.7595 22.2857 17.1429 21.9024 17.1429 21.4286V10.2857C17.1429 9.81193 16.7595 9.42857 16.2857 9.42857C15.8119 9.42857 15.4286 9.81428 15.4286 10.2857V21.4286C15.4286 21.9 15.8143 22.2857 16.2857 22.2857Z"
-      />
+      <path d="M23.1429 4.28571H18.7296L16.9082 1.24554C16.3982 0.472875 15.6107 0 14.7107 0H9.28929C8.38929 0 7.55357 0.472875 7.09286 1.24554L5.27036 4.28571H0.857143C0.381696 4.28571 0 4.66768 0 5.14286V6C0 6.47679 0.381696 6.85714 0.857143 6.85714H1.71429V24C1.71429 25.8937 3.24911 27.4286 5.14286 27.4286H18.8571C20.7509 27.4286 22.2857 25.8937 22.2857 24V6.85714H23.1429C23.6196 6.85714 24 6.47679 24 6V5.14286C24 4.66768 23.6196 4.28571 23.1429 4.28571ZM9.20893 2.72571C9.2625 2.63196 9.36964 2.57143 9.48214 2.57143H14.5179C14.6317 2.57143 14.7388 2.6317 14.7924 2.72545L15.7286 4.28571H8.27143L9.20893 2.72571ZM18.8571 24.8571H5.14286C4.66945 24.8571 4.28571 24.4734 4.28571 24V6.85714H19.7143V24C19.7143 24.4714 19.3286 24.8571 18.8571 24.8571ZM12 22.2857C12.4738 22.2857 12.8571 21.9024 12.8571 21.4286V10.2857C12.8571 9.81193 12.4738 9.42857 12 9.42857C11.5262 9.42857 11.1429 9.81428 11.1429 10.2857V21.4286C11.1429 21.9 11.5286 22.2857 12 22.2857ZM7.71429 22.2857C8.18571 22.2857 8.57143 21.9 8.57143 21.4286V10.2857C8.57143 9.81193 8.18807 9.42857 7.71429 9.42857C7.2405 9.42857 6.85714 9.81428 6.85714 10.2857V21.4286C6.85714 21.9 7.24286 22.2857 7.71429 22.2857ZM16.2857 22.2857C16.7595 22.2857 17.1429 21.9024 17.1429 21.4286V10.2857C17.1429 9.81193 16.7595 9.42857 16.2857 9.42857C15.8119 9.42857 15.4286 9.81428 15.4286 10.2857V21.4286C15.4286 21.9 15.8143 22.2857 16.2857 22.2857Z" />
+    </svg>
+  );
+};
+
+export const SearchIcon = ({
+  onclick,
+  style,
+  width,
+  height,
+  role,
+}: IconProps) => {
+  return (
+    <svg
+      role={role ?? "none"}
+      width={width}
+      height={height}
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+      className={style ?? ""}
+      onClick={onclick}
+    >
+      <path d="M344.5,298c15-23.6,23.8-51.6,23.8-81.7c0-84.1-68.1-152.3-152.1-152.3C132.1,64,64,132.2,64,216.3  c0,84.1,68.1,152.3,152.1,152.3c30.5,0,58.9-9,82.7-24.4l6.9-4.8L414.3,448l33.7-34.3L339.5,305.1L344.5,298z M301.4,131.2  c22.7,22.7,35.2,52.9,35.2,85c0,32.1-12.5,62.3-35.2,85c-22.7,22.7-52.9,35.2-85,35.2c-32.1,0-62.3-12.5-85-35.2  c-22.7-22.7-35.2-52.9-35.2-85c0-32.1,12.5-62.3,35.2-85c22.7-22.7,52.9-35.2,85-35.2C248.5,96,278.7,108.5,301.4,131.2z" />
     </svg>
   );
 };

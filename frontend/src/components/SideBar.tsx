@@ -17,7 +17,7 @@ function SideBar() {
           />
           <span
             role="none"
-            className="bg-greenIcons w-2 h-2 absolute right-3 bottom-8 rounded-full"
+            className="bg-greenIcons w-2 h-2 absolute right-4 bottom-7 rounded-full"
           />
           <span className="text-sm text-secondaryText">Jain Doe</span>
         </div>
@@ -30,7 +30,7 @@ function SideBar() {
             style={`cursor-pointer fill-none stroke-2 w-full ${
               page === "chats"
                 ? "border-l-4 border-blueBar stroke-blueBar"
-                : "hover:stroke-blueBar stroke-primaryText transition-colors duration-300 ease-out"
+                : "hover:stroke-blueBar stroke-thirdBg transition-colors duration-300 ease-out"
             }`}
           />
           <UsersIcon
@@ -40,7 +40,7 @@ function SideBar() {
             style={`cursor-pointer stroke-2 w-full ${
               page === "contacts"
                 ? "border-l-4 border-blueBar fill-blueBar"
-                : "fill-primaryText hover:fill-blueBar transition-colors duration-300 ease-out"
+                : "fill-thirdBg hover:fill-blueBar transition-colors duration-300 ease-out"
             }`}
           />
           <PhoneIcon
@@ -50,7 +50,7 @@ function SideBar() {
             style={`cursor-pointer stroke-2 w-full ${
               page === "calls"
                 ? "border-l-4 border-blueBar fill-blueBar"
-                : "fill-primaryText hover:fill-blueBar transition-colors duration-300 ease-out"
+                : "fill-thirdBg hover:fill-blueBar transition-colors duration-300 ease-out"
             }`}
           />
         </div>
@@ -59,6 +59,7 @@ function SideBar() {
         <Settings />
 
         <PowerIcon
+          role="button"
           onclick={() => setStatus(!status)}
           width="28"
           height="28"
