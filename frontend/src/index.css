@@ -21,7 +21,7 @@
   --secondaryBg: theme("colors.gray.50");
   --thirdBg: theme("colors.gray.100");
   --redIcons: theme("colors.red.600");
-  --greenIcons: theme("colors.green.600");
+  --greenIcons: theme("colors.green.500");
   --blueBar: theme("colors.sky.600");
   --primaryText: theme("colors.slate.800");
   --secondaryText: theme("colors.gray.300");

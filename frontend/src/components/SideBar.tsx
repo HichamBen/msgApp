@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ChatsIcon, PhoneIcon, PowerIcon, UsersIcon } from "../icons";
 import Settings from "./Settings";
+import { NavLink } from "react-router-dom";
 
 function SideBar() {
-  const [page, setPage] = useState<"chats" | "contacts" | "calls">("chats");
   const [status, setStatus] = useState(false);
 
   return (
@@ -11,9 +11,9 @@ function SideBar() {
       <div>
         <div className="relative w-full px-2 text-center" aria-label="username">
           <img
-            src="/avatar/profile.jpg"
+            src="/avatars/avatar.jpg"
             alt="avatar"
-            className="rounded-full aspect-square object-center"
+            className="rounded-full object-cover object-center"
           />
           <span
             role="none"
@@ -23,36 +23,52 @@ function SideBar() {
         </div>
 
         <div className="w-full mt-12 flex flex-col gap-y-5 items-center">
-          <ChatsIcon
-            onclick={() => setPage("chats")}
-            width="30"
-            height="30"
-            style={`cursor-pointer fill-none stroke-2 w-full ${
-              page === "chats"
-                ? "border-l-4 border-blueBar stroke-blueBar"
-                : "hover:stroke-blueBar stroke-thirdBg transition-colors duration-300 ease-out"
-            }`}
-          />
-          <UsersIcon
-            onclick={() => setPage("contacts")}
-            width="30"
-            height="30"
-            style={`cursor-pointer stroke-2 w-full ${
-              page === "contacts"
-                ? "border-l-4 border-blueBar fill-blueBar"
-                : "fill-thirdBg hover:fill-blueBar transition-colors duration-300 ease-out"
-            }`}
-          />
-          <PhoneIcon
-            onclick={() => setPage("calls")}
-            width="30"
-            height="30"
-            style={`cursor-pointer stroke-2 w-full ${
-              page === "calls"
-                ? "border-l-4 border-blueBar fill-blueBar"
-                : "fill-thirdBg hover:fill-blueBar transition-colors duration-300 ease-out"
-            }`}
-          />
+          <NavLink
+            to="/chats"
+            className={({ isActive }) => `cursor-pointer w-full
+             ${
+               isActive
+                 ? "border-l-4 border-blueBar stroke-blueBar"
+                 : "hover:stroke-blueBar stroke-thirdBg transition-colors duration-300 ease-out"
+             }
+              `}
+          >
+            <ChatsIcon
+              width="30"
+              height="30"
+              style="fill-none stroke-2 m-auto"
+            />
+          </NavLink>
+
+          <NavLink
+            to="/contacts"
+            className={({ isActive }) => `cursor-pointer w-full
+             ${
+               isActive
+                 ? "border-l-4 border-blueBar fill-blueBar"
+                 : "fill-thirdBg hover:fill-blueBar transition-colors duration-300 ease-out"
+             }
+              `}
+          >
+            <UsersIcon
+              width="30"
+              height="30"
+              style="cursor-pointer stroke-2 m-auto"
+            />
+          </NavLink>
+
+          <NavLink
+            to="/calls"
+            className={({ isActive }) => `cursor-pointer w-full
+             ${
+               isActive
+                 ? "border-l-4 border-blueBar fill-blueBar"
+                 : "fill-thirdBg hover:fill-blueBar transition-colors duration-300 ease-out"
+             }
+              `}
+          >
+            <PhoneIcon width="30" height="30" style="stroke-2 m-auto" />
+          </NavLink>
         </div>
       </div>
       <div className="w-full flex flex-col gap-y-5 items-center">

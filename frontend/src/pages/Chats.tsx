@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
 import HeaderRow from "../components/HeaderRow";
-import { contacts } from "../data";
+import { chats } from "../data";
 
 function Chats() {
   const { pathname } = useLocation();
@@ -15,14 +15,15 @@ function Chats() {
         </h1>
         {/* section titled with contacts row*/}
         <ul className="h-[calc(100vh-130px)] px-2 overflow-y-auto">
-          {contacts.map(contact => (
+          {chats.map(chat => (
             <HeaderRow
-              key={contact.id}
-              title={contact.name}
-              description={contact.lastMsg}
-              imgSrc={contact.picture}
-              withBadge={contact.status}
-              withTime={contact.time}
+              type="chat"
+              key={chat.id}
+              title={chat.name}
+              description={chat.lastMsg}
+              imgSrc={chat.picture}
+              connected={chat.connected}
+              time={chat.time}
             />
           ))}
         </ul>
