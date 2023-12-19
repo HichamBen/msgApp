@@ -50,3 +50,12 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-blueBar;
 }
+
+/* handele header row*/
+.headerRow:hover:has(img:hover) {
+  @apply bg-none
+}
+.headerRow:hover:has(img:not(:hover)) {
+  @apply bg-mainBg
+}
+

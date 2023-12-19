@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import {
   AscArrowIcon,
   CheckIcon,
@@ -8,9 +8,11 @@ import {
   HistoryIcon,
   VideoIcon,
 } from "../icons";
+import { useNavigate } from "react-router-dom";
 
 type HeaderRowProps =
   | {
+      id: string;
       title: string;
       imgSrc: string;
     } & (
@@ -42,6 +44,7 @@ type HeaderRowProps =
     );
 
 function HeaderRow({
+  id,
   title,
   imgSrc,
   type,
@@ -50,10 +53,11 @@ function HeaderRow({
   time,
   status,
 }: HeaderRowProps) {
-  let template: ReactNode;
+  const navigate = useNavigate();
+  const template = useRef<ReactNode>();
 
   if (type === "chat") {
-    template = (
+    template.current = (
       <>
         <div className="relative w-full text-primaryText">
           <h3 className="text-sm">{title}</h3>
@@ -73,72 +77,79 @@ function HeaderRow({
       </>
     );
   } else if (type === "contact") {
-    template = (
+    template.current = (
       <div className="relative w-full text-primaryText">
         <h3 className="text-sm">{title}</h3>
         <p className="text-[13px]">{description}</p>
       </div>
     );
   } else {
-    template = (
-      <>
-        <div className="relative w-full text-primaryText">
-          <h3 className="text-sm">{title}</h3>
-          <p className="text-[13px]">
-            {time}
-            &nbsp;
-            {status && status === "decline" ? (
-              <DesArrowIcon
-                width="16"
-                height="16"
-                style="fill-redIcons inline-block ml-0.5 mb-0.5 absolute"
-              />
-            ) : status === "answer" ? (
-              <DesArrowIcon
-                width="16"
-                height="16"
-                style="fill-greenIcons inline-block ml-0.5 mb-0.5 absolute"
-              />
-            ) : (
-              <AscArrowIcon
-                width="16"
-                height="16"
-                style="fill-greenIcons inline-block ml-0.5 mb-0.5 absolute"
-              />
-            )}
-          </p>
-
-          {type === "voice" ? (
-            <FilledPhone
-              width="18"
-              height="18"
-              style="fill-greenIcons cursor-pointer hover:fill-green-400 duration-300 ease-out inline-block mb-0.5 absolute right-0 top-0"
+    template.current = (
+      <div className="relative w-full text-primaryText">
+        <h3 className="text-sm">{title}</h3>
+        <p className="text-[13px]">
+          {time}
+          &nbsp;
+          {status && status === "decline" ? (
+            <DesArrowIcon
+              width="16"
+              height="16"
+              style="fill-redIcons inline-block ml-0.5 mb-0.5 absolute"
+            />
+          ) : status === "answer" ? (
+            <DesArrowIcon
+              width="16"
+              height="16"
+              style="fill-greenIcons inline-block ml-0.5 mb-0.5 absolute"
             />
           ) : (
-            <VideoIcon
-              width="20"
-              height="18"
-              style="fill-greenIcons cursor-pointer hover:fill-green-400 duration-300 ease-out inline-block mb-0.5 absolute right-0 top-0"
+            <AscArrowIcon
+              width="16"
+              height="16"
+              style="fill-greenIcons inline-block ml-0.5 mb-0.5 absolute"
             />
           )}
-        </div>
-      </>
+        </p>
+
+        {type === "voice" ? (
+          <FilledPhone
+            width="18"
+            height="18"
+            style="fill-greenIcons cursor-pointer hover:fill-green-400 duration-300 ease-out inline-block mb-0.5 absolute right-0 top-0"
+          />
+        ) : (
+          <VideoIcon
+            width="20"
+            height="18"
+            style="fill-greenIcons cursor-pointer hover:fill-green-400 duration-300 ease-out inline-block mb-0.5 absolute right-0 top-0"
+          />
+        )}
+      </div>
     );
   }
 
   return (
     <div
-      className={`mt-4 relative border-b border-mainBg ${
-        type === "chat" ||
-        (type === "contact" && "hover:bg-mainBg cursor-pointer")
+      onClick={
+        type === "chat" || type === "contact"
+          ? () => navigate(`/chats/${id}`)
+          : undefined
+      }
+      className={`mt-4 relative border-b border-mainBg group ${
+        (type === "chat" || type === "contact") &&
+        "headerRow cursor-pointer"
       }  p-2 rounded-sm flex space-x-2 items-center`}
     >
       <img
+        onClick={e => {
+          e.stopPropagation();
+          navigate(`/contacts/${id}`);
+        }}
         src={imgSrc}
         alt={"pic-" + title}
         className="w-12 h-12 object-cover object-center rounded-full shrink-0"
       />
-      {template}
+      {template.current}
     </div>
   );
 }
