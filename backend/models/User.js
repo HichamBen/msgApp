@@ -34,16 +34,6 @@ const userSchema = new mongoose.Schema(
       size: Number,
     },
 
-    contacts: [
-      {
-        contact: { type: mongoose.Schema.Types.ObjectId },
-        status: {
-          type: String,
-          enum: ["blocked", "unblocked"],
-          default: "unblocked",
-        },
-      },
-    ],
     verifiedAccount: {
       type: Boolean,
       default: false,
@@ -145,7 +135,5 @@ userSchema.statics.login = async function (email, password) {
 };
 
 const User = mongoose.model("User", userSchema);
-
-userSchema.path("contacts.contact").ref("User");
 
 module.exports = User;

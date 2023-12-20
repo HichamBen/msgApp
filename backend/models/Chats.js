@@ -2,13 +2,35 @@ const mongoose = require("mongoose");
 const User = require("./User");
 const Message = require("./Message");
 
-const chatSchema = new mongoose.Schema({
-  users: [{ type: mongoose.SchemaTypes.ObjectId, ref: User }],
-  latestMsg: {
-   type:mongoose.SchemaTypes.ObjectId,
-   ref: Message
-  }
-});
+const chatSchema = new mongoose.Schema(
+  {
+    chatTitle: String,
+    isGroup: {
+      type: Boolean,
+      default: false,
+    },
+    participants: [
+      {
+        userId: {
+          type: mongoose.SchemaTypes.ObjectId,
+          ref: User,
+        },
+        // date of the server
+        deletedAt: {
+          type: Date,
+          default: null,
+        },
+      },
+    ],
+
+    groupAdmin: mongoose.SchemaTypes.ObjectId,
+    latestMsg: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: Message,
+    },
+  },
+  { timestamps: true }
+);
 
 const Chat = mongoose.model("Chat", chatSchema);
 
