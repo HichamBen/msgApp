@@ -13,7 +13,7 @@ type ThemeContextProviderProps = {
 };
 
 // create a theme context
-const ThemeContext = createContext<ThemeContextProps>({} as ThemeContextProps);
+const ThemeContext = createContext({} as ThemeContextProps);
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   const [theme, setTheme] = useState<modeProps>("dark");

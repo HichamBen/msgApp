@@ -1,14 +1,7 @@
 import { ReactNode, useRef } from "react";
-import {
-  AscArrowIcon,
-  CheckIcon,
-  DesArrowIcon,
-  DoubleCheckIcon,
-  FilledPhone,
-  HistoryIcon,
-  VideoIcon,
-} from "../icons";
+import { AscArrowIcon, DesArrowIcon, FilledPhone, VideoIcon } from "../icons";
 import { useNavigate } from "react-router-dom";
+import LatestMsg from "./LatestMsg";
 
 type HeaderRowProps =
   | {
@@ -20,18 +13,14 @@ type HeaderRowProps =
           type: "chat";
           connected: boolean;
           time: string;
-          status?: undefined;
-          description: {
-            from?: string;
-            content: string;
-            status?: "wait" | "onserver" | "arrived" | "viewed";
-          };
+          status?: "waited" | "saved" | "recieved" | "viewed";
+          description: description;
         }
       | {
           type: "contact";
           connected?: undefined;
           time?: undefined;
-          status?: undefined;
+          status: "wait" | "accept" | "block";
           description: string;
         }
       | {
@@ -61,11 +50,7 @@ function HeaderRow({
       <>
         <div className="relative w-full text-primaryText">
           <h3 className="text-sm">{title}</h3>
-          <p className="text-[13px]">
-            {description.status && <StatusIcon status={description.status} />}
-            &nbsp;
-            {description.content}
-          </p>
+          <LatestMsg description={description} status={status} />
 
           <span className="absolute text-xs right-0 top-0">{time}</span>
         </div>
@@ -136,8 +121,7 @@ function HeaderRow({
           : undefined
       }
       className={`mt-4 relative border-b border-mainBg group ${
-        (type === "chat" || type === "contact") &&
-        "headerRow cursor-pointer"
+        (type === "chat" || type === "contact") && "headerRow cursor-pointer"
       }  p-2 rounded-sm flex space-x-2 items-center`}
     >
       <img
@@ -152,42 +136,6 @@ function HeaderRow({
       {template.current}
     </div>
   );
-}
-
-function StatusIcon({ status }: { status: string }) {
-  if (status === "wait") {
-    return (
-      <HistoryIcon
-        width="14"
-        height="14"
-        style="fill-secondaryText inline-block mb-0.5"
-      />
-    );
-  } else if (status === "onserver") {
-    return (
-      <CheckIcon
-        width="14"
-        height="14"
-        style="fill-secondaryText inline-block mb-0.5"
-      />
-    );
-  } else if (status === "arrived") {
-    return (
-      <DoubleCheckIcon
-        width="14"
-        height="14"
-        style="fill-secondaryText inline-block mb-0.5"
-      />
-    );
-  } else {
-    return (
-      <DoubleCheckIcon
-        width="14"
-        height="14"
-        style="fill-sky-400 inline-block mb-0.5"
-      />
-    );
-  }
 }
 
 export default HeaderRow;

@@ -1,12 +1,53 @@
 import { Outlet, useLocation } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
 import HeaderRow from "../components/HeaderRow";
-import { contacts } from "../data";
 import { PlusIcon } from "../icons";
+import useFetchData from "../hooks/useFetchData";
+import Banner from "../components/Banner";
+import { ReactNode, useRef } from "react";
 
 function Contacts() {
   const { pathname } = useLocation();
+  const { data, error, loading } = useFetchData<ContactsProps>("contacts");
 
+  const template = useRef<ReactNode>();
+
+  if (loading) {
+    template.current = <h1>Loading...</h1>;
+  }
+  if (error) {
+    template.current = <Banner message={error} />;
+  }
+
+  if (!error && !loading && data) {
+    template.current =
+      data.length > 0 ? (
+        data.map(({ contact, statusFromMe }) => (
+          <HeaderRow
+            type="contact"
+            id={contact._id}
+            key={contact._id}
+            title={
+              contact.status === "accept" || contact.profileStatus === "all"
+                ? contact.username
+                : contact.email
+            }
+            description={contact.description}
+            imgSrc={
+              contact.picture &&
+              (contact.status === "accept" || contact.profileStatus === "all")
+                ? contact.picture
+                : "/avatars/avatar5.webp"
+            }
+            status={statusFromMe}
+          />
+        ))
+      ) : (
+        <p className="text-primaryText text-lg text-center mt-[20%]">
+          No contacts
+        </p>
+      );
+  }
   return (
     <section className="w-full h-full grid grid-cols-6">
       <aside className="relative hidden h-full pt-4 bg-secondaryBg lg:block lg:col-span-2">
@@ -15,22 +56,7 @@ function Contacts() {
           Contacts
         </h1>
         <ul className="h-[calc(100vh-130px)] px-2 overflow-y-auto">
-          {contacts ? (
-            contacts.map(contact => (
-              <HeaderRow
-                id={contact.id}
-                key={contact.id}
-                type="contact"
-                title={contact.name}
-                description={contact.description}
-                imgSrc={contact.picture}
-              />
-            ))
-          ) : (
-            <p className="w-12 text-primaryText text-lg text-center mt-[20%]">
-              No contacts
-            </p>
-          )}
+          {template.current}
         </ul>
         <PlusIcon
           width="48"

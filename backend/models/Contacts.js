@@ -4,7 +4,7 @@ const User = require("./User");
 const contactSchema = new mongoose.Schema(
   {
     user1: {
-      userId: {
+      contact: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: User,
       },
@@ -12,7 +12,7 @@ const contactSchema = new mongoose.Schema(
       // status of the user1  according to user2
       status: {
         type: String,
-        enum: ["Wait", "Accepted", "Blocked"],
+        enum: ["wait","accept","block"],
         lowercase: true,
         default: "Wait",
       },
@@ -20,15 +20,15 @@ const contactSchema = new mongoose.Schema(
 
     // status of the user2  according to user1
     user2: {
-      userId: {
+      contact: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: User,
       },
       status: {
         type: String,
-        enum: ["Wait", "Accepted", "Blocked"],
+        enum: ["wait","accept","block"],
         lowercase: true,
-        default: "Wait",
+        default: "wait",
       },
     },
   },
