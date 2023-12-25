@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const { generatePwd, isValidPwd } = require("../utilities/genValidPwd");
 const {
   validName,
@@ -33,7 +32,8 @@ const userSchema = new mongoose.Schema(
       data: Buffer,
       size: Number,
     },
-
+    connected: { type: Boolean, default: false },
+    profileStatus: { type: String, enum: ["contacts", "all"], default: "contacts" },
     verifiedAccount: {
       type: Boolean,
       default: false,

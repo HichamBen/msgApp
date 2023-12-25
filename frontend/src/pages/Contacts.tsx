@@ -61,7 +61,7 @@ function Contacts() {
         <PlusIcon
           width="48"
           height="48"
-          style="cursor-pointer fill-mainBg shadow-xl bg-greenIcons absolute right-3 bottom-16 hover:opacity-80 duration-300 ease-out rounded-full"
+          style="cursor-pointer fill-greenIcons shadow-xl bg-white absolute right-3 bottom-16 hover:opacity-80 duration-300 ease-out rounded-full"
         />
       </aside>
       {pathname.match(/^(\/contacts|\/contacts\/)$/) ? (

@@ -6,6 +6,7 @@ import useFetchData from "../hooks/useFetchData";
 import { ReactNode, useContext, useRef } from "react";
 import Banner from "../components/Banner";
 import AuthContext from "../context/AuthContext";
+import { handleScrolling } from "../utilities";
 
 function Chats() {
   const { pathname } = useLocation();
@@ -84,14 +85,14 @@ function Chats() {
           Chats
         </h1>
         {/* section titled with contacts row*/}
-        <ul className="h-[calc(100vh-130px)] px-2 overflow-y-auto">
+        <ul onScroll={handleScrolling} className="h-[calc(100vh-130px)] px-2 overflow-y-auto">
           {template.current}
         </ul>
-        <button className="group absolute right-3 bottom-16 bg-mainBg shadow-xl hover:opacity-80 duration-300 ease-out w-12 h-12 rounded-full">
+        <button className="group absolute right-3 bottom-16 bg-greenIcons shadow-xl hover:opacity-80 duration-300 ease-out w-12 h-12 rounded-full">
           <ChatsIcon
             width="28"
             height="28"
-            style="stroke-[3px] stroke-greenIcons fill-none m-auto"
+            style="stroke-[3px] stroke-white fill-none m-auto"
           />
         </button>
       </aside>

@@ -30,7 +30,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
         description: "You can call me average.",
         email: "jain@mail.com",
         picture: "/avatars/avatar.jpg",
-        profileStatus: "All",
+        profileStatus: "all",
         connected: true,
       },
     });

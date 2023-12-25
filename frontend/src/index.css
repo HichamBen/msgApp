@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 .dark-theme {
-  --mainBg: theme("colors.gray.800");
+  --mainBg: theme("colors.slate.500");
   --sideBg: theme("colors.black");
   --secondaryBg: theme("colors.gray.600");
   --thirdBg: theme("colors.gray.300");
@@ -16,7 +16,7 @@
 }
 
 .light-theme {
-  --mainBg: theme("colors.gray.200");
+  --mainBg: theme("colors.slate.200");
   --sideBg: theme("colors.slate.800");
   --secondaryBg: theme("colors.gray.50");
   --thirdBg: theme("colors.gray.100");
@@ -33,25 +33,13 @@
 
 /* width */
 ::-webkit-scrollbar {
-  @apply w-1;
+  @apply w-2;
+}
+.scroll::-webkit-scrollbar-thumb {
+  @apply bg-sideBg;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  @apply bg-gray-500;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  @apply bg-secondaryText rounded-md;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-blueBar;
-}
-
-/* handele header row*/
+/* handel header row*/
 .headerRow:hover:has(img:hover) {
   @apply bg-none
 }

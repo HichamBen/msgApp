@@ -33,8 +33,8 @@ function Calls() {
             </p>
           )}
         </ul>
-        <button className="absolute right-3 bottom-16 bg-mainBg shadow-xl hover:opacity-80 duration-300 ease-out w-12 h-12 rounded-full">
-          <FilledPhone width="28" height="28" style="fill-greenIcons m-auto" />
+        <button className="absolute right-3 bottom-16 bg-greenIcons shadow-xl hover:opacity-80 duration-300 ease-out w-12 h-12 rounded-full">
+          <FilledPhone width="28" height="28" style="fill-white m-auto" />
         </button>
       </aside>
       {pathname.match(/^(\/calls|\/calls\/)$/) ? (

@@ -11,3 +11,16 @@ export function chooseTheme(theme: modeProps) {
    }
 }
 
+let timerId = 0
+export function handleScrolling(e: React.UIEvent<HTMLUListElement, UIEvent>) {
+   const element = e.target as HTMLDivElement
+
+   if (timerId !== 0) clearTimeout(timerId);
+   element.classList.add("scroll");
+
+   timerId = setTimeout(() => {
+      element.classList.remove("scroll");
+      clearTimeout(timerId)
+   }, 500)
+}
+
